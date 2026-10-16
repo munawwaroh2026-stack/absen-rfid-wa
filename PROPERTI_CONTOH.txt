@@ -1,0 +1,17 @@
+Masukkan ini sebagai NAMA properti di Apps Script > Project Settings > Script properties.
+Isi NILAI dengan data milik Anda, bukan menyalin teks contoh di bawah.
+Jangan menuliskan password/token di file ini atau di GitHub.
+
+FIREBASE_API_KEY = apiKey konfigurasi web Firebase yang sama dengan aplikasi
+FIREBASE_PROJECT_ID = projectId; bukan nama tampilan proyek, bukan appId
+FIREBASE_SENDER_EMAIL = email akun khusus pengirim yang Anda buat di Firebase Authentication
+FIREBASE_SENDER_PASSWORD = password akun khusus pengirim tersebut
+META_ACCESS_TOKEN = access token sistem WhatsApp Cloud API milik sekolah
+META_PHONE_NUMBER_ID = ID nomor pengirim dari Meta; BUKAN nomor HP
+META_API_VERSION = versi Graph API dari contoh request aktif di dashboard Meta
+META_TEMPLATE_NAME = absensi_siswa
+META_TEMPLATE_LANGUAGE = id
+
+Tidak ada nilai yang sudah diisi otomatis. Tidak perlu Firebase Blaze.
+Token WhatsApp sementara dapat kedaluwarsa; gunakan system user token dengan izin yang sesuai.
+Jangan mendeploy Kode.gs sebagai web app. Jalankan cekKoneksi lalu pasangPemicu.

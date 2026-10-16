@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // GANTI dengan UID dari Authentication > Users, BUKAN email / projectId.
+    function admin() {
+      return request.auth != null && request.auth.uid in ['iA9CDPnZaIUOREpR2Fb12JMCJvz1'];
+    }
+    function sender() {
+      return request.auth != null && request.auth.uid in ['GANTI_UID_PENGIRIM_WHATSAPP'];
+    }
+    function validStudent(id) {
+      let d = request.resource.data;
+      return d.id == id && d.rfid == id && d.rfid is string
+        && d.rfid.matches('^[A-Z0-9_-]{1,64}$')
+        && d.name is string && d.name.size() > 0 && d.name.size() <= 100
+        && d.className is string && d.className.size() > 0 && d.className.size() <= 30
+        && d.phone is string && (d.phone == '' || d.phone.matches('^[0-9]{8,15}$'))
+        && d.waConsent is bool && d.enrolledOn is string && d.inactiveOn is string;
+    }
+    match /students/{id} {
+      allow read: if admin();
+      allow create, update: if admin() && validStudent(id);
+      allow delete: if admin();
+    }
+    match /attendance/{id} {
+      allow get: if admin() || sender();
+      allow list: if admin();
+      allow create, update: if admin()
+        && request.resource.data.id == id
+        && request.resource.data.date is string
+        && request.resource.data.studentId is string
+        && request.resource.data.status in ['Hadir','Terlambat','Izin','Sakit','Alpa'];
+      allow delete: if admin();
+    }
+    match /settings/school {
+      allow get: if admin() || sender();
+      allow create, update: if admin();
+    }
+    match /outbox/{id} {
+      allow read: if admin() || sender();
+      allow create: if admin()
+        && request.resource.data.id == id
+        && request.resource.data.status == 'pending'
+        && request.resource.data.attempts == 0
+        && request.resource.data.phone.matches('^[0-9]{8,15}$');
+      allow update: if (admin() || sender())
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['status','attempts','updatedAt','error','providerId','claimedAt'])
+        && request.resource.data.status in ['pending','processing','accepted','error','uncertain','cancelled']
+        && request.resource.data.attempts is int
+        && request.resource.data.attempts >= resource.data.attempts;
+      allow delete: if admin();
+    }
+    // Semua koleksi lain tertutup, termasuk akun Auth yang UID-nya tidak terdaftar.
+    match /{document=**} { allow read, write: if false; }
+  }
+}
