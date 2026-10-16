@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+ <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="theme-color" content="#087f8c">
+ <meta name="description" content="Absensi siswa dengan RFID USB untuk SMP AL-MIFTAH KETAPANG.">
+ <title>AL-MIFTAH · Absensi Siswa</title>
+ <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="assets/style.css">
+ <script src="app-config.js" defer></script><script src="assets/core.js" defer></script>
+ <script src="assets/backend.js" defer></script><script src="assets/vendor/excel.js" defer></script>
+ <script src="assets/app.js" defer></script>
+</head>
+<body>
+ <a href="#main" class="skip">Lewati ke isi</a>
+ <aside class="sidebar" id="sidebar">
+   <a class="brand" href="#dashboard"><span class="brand-mark" id="school-logo"><img src="assets/mark.svg" alt=""></span><span><span id="brand-short">AL-MIFTAH</span><small>ABSENSI SISWA</small></span></a>
+   <div class="school-label" id="school-side">SMP AL-MIFTAH KETAPANG</div>
+   <div class="nav-caption">RUANG PETUGAS</div>
+   <nav id="nav" aria-label="Menu utama"></nav>
+   <div class="side-bottom"><span class="connection-dot"></span><span id="side-mode">Mode demo lokal</span><small>RFID USB · Firebase Spark</small></div>
+   <a class="help-link" href="PANDUAN.html" target="_blank" rel="noopener">Bantuan pemasangan <span>↗</span></a>
+ </aside>
+ <div class="app-wrap">
+  <header class="topbar">
+   <div class="top-left"><button id="mobile-menu" class="icon-btn mobile-menu" aria-label="Buka menu" aria-expanded="false">☰</button><span class="breadcrumb">Ruang petugas <span>/</span> <b id="page-label">Dashboard</b></span></div>
+   <div class="top-actions"><span class="top-clock" id="top-clock">--:--</span><span id="mode-badge" class="pill neutral">Demo lokal</span><button class="account" id="account-btn"><span class="avatar small">P</span><span id="account-text">Petugas demo</span></button></div>
+  </header>
+  <div id="mode-banner" class="mode-banner" role="status"></div>
+  <main id="main" tabindex="-1"></main>
+  <footer class="footer"><span id="footer-school">SMP AL-MIFTAH KETAPANG</span><span>Absensi siswa · <a href="PANDUAN.html" target="_blank" rel="noopener">Panduan</a></span></footer>
+ </div>
+ <dialog id="dialog" aria-labelledby="dialog-title"><div class="dialog-head"><h2 id="dialog-title"></h2><button id="dialog-close" class="icon-btn" aria-label="Tutup">×</button></div><div id="dialog-body"></div></dialog>
+ <div class="toast-stack" id="toasts" aria-live="polite"></div>
+ <noscript>Aplikasi membutuhkan JavaScript. Aktifkan JavaScript di browser Anda.</noscript>
+</body></html>
